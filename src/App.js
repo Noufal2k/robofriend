@@ -12,10 +12,13 @@ class App extends Component {
             searchField : ''
         }    
     }
+    getUsers = async function() {
+        const resp = await fetch('https://jsonplaceholder.typicode.com/users')
+        const users = await resp.json()
+        this.setState({robots:users})
+    }
     componentDidMount(){
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => response.json())
-            .then(users => this.setState({robots:users}))
+        this.getUsers();
     }
     handleSearch = event => {
         this.setState({searchField:event.target.value})
